@@ -525,10 +525,17 @@ class Deal(HighriseObject):
     }        
 
     @classmethod
-    def all(cls):
-        """Get all deals"""
-
-        return cls._list('deals.xml', 'deal')
+    def all(cls, page=1):
+        """Get all deals (only 500 per page)"""
+        if page < 0:
+            print 'Nope'
+            return False
+        #make pagination possible
+        if page == 0:
+            page_request = '?n=0'
+        else:
+            page_request = '?n={}'.format(page * 500)
+        return cls._list('deals.xml' + page_request, 'deal')
 
     @classmethod
     def get(cls, id):
