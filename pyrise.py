@@ -484,6 +484,25 @@ class Note(Message):
     singular = 'note'
 
 
+class DealCategory(HighriseObject):
+	"""An object representing all Highrise deal dategories"""
+	fields = {
+		'id': HighriseField(type='id'),
+		'account_id': HighriseField(type=int),
+		'name': HighriseField(type=str),
+		'color': HighriseField(type=str),
+		'created_at': HighriseField(type=datetime),
+		'updated_at': HighriseField(type=datetime),
+		'elements_count': HighriseField(type=int),
+	}
+
+	@classmethod
+	def all(cls):
+		"""Get all deal-categories"""
+
+		return cls._list('deal_categories.xml', 'deal-category')
+
+
 class Email(Message):
     """An object representing a Highrise email"""
 
